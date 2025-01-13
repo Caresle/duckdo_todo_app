@@ -1,5 +1,6 @@
 import 'package:duckdo_todo/config/environment.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
+import 'package:duckdo_todo/widgets/add_todo.dart';
 import 'package:duckdo_todo/widgets/todo_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,25 +29,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'DuckDo Todo',
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(226, 232, 240, 1),
-        body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: TodoList(),
-        )),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-            // side: BorderSide(color: Colors.white),
-          ),
-          onPressed: () {},
-          child: Icon(
-            Icons.add_rounded,
-            color: Colors.white,
-          ),
-        ),
-      ),
+          backgroundColor: Color.fromRGBO(226, 232, 240, 1),
+          body: SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: TodoList(),
+          )),
+          floatingActionButton: AddTodo()),
     );
   }
 }

@@ -8,8 +8,8 @@ class TodoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = todo.completed ? Colors.white : Colors.black;
-    final textColor = todo.completed ? Colors.black : Colors.white;
+    final backgroundColor = !todo.completed ? Colors.white : Colors.black;
+    final textColor = !todo.completed ? Colors.black : Colors.white;
 
     return Padding(
       padding: const EdgeInsets.all(4.0),
@@ -24,7 +24,7 @@ class TodoCard extends StatelessWidget {
               Row(
                 children: [
                   Checkbox(
-                    value: false,
+                    value: todo.completed,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -33,7 +33,7 @@ class TodoCard extends StatelessWidget {
                     onChanged: (value) {},
                   ),
                   Text(
-                    'TASK NAME',
+                    todo.task,
                     style: TextStyle(color: textColor),
                   ),
                 ],
