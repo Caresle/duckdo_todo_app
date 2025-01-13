@@ -1,14 +1,15 @@
+import 'package:duckdo_todo/entities/todo_entity.dart';
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatelessWidget {
-  final bool completed;
+  final TodoEntity todo;
 
-  const TodoCard({super.key, required this.completed});
+  const TodoCard({super.key, required this.todo});
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = completed ? Colors.white : Colors.black;
-    final textColor = completed ? Colors.black : Colors.white;
+    final backgroundColor = todo.completed ? Colors.white : Colors.black;
+    final textColor = todo.completed ? Colors.black : Colors.white;
 
     return Padding(
       padding: const EdgeInsets.all(4.0),
