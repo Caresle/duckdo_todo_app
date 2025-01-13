@@ -17,4 +17,14 @@ class TodoProvider extends ChangeNotifier {
     await TodosService.create(todo);
     getAll();
   }
+
+  Future<void> update(TodoEntity todo) async {
+    await TodosService.update(todo);
+    getAll();
+  }
+
+  Future<void> delete(TodoEntity todo) async {
+    await TodosService.delete(todo);
+    getAll();
+  }
 }

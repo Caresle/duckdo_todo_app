@@ -1,5 +1,7 @@
 import 'package:duckdo_todo/entities/todo_entity.dart';
+import 'package:duckdo_todo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TodoCard extends StatelessWidget {
   final TodoEntity todo;
@@ -30,7 +32,12 @@ class TodoCard extends StatelessWidget {
                     ),
                     activeColor: Colors.black,
                     checkColor: Colors.black,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      final newTodo = todo.copyWith(completed: value);
+                      final todoProvider = context.read<TodoProvider>();
+
+                      todoProvider.update(newTodo);
+                    },
                   ),
                   Text(
                     todo.task,
@@ -43,7 +50,11 @@ class TodoCard extends StatelessWidget {
                     backgroundColor: WidgetStateProperty.all(backgroundColor),
                     overlayColor:
                         WidgetStatePropertyAll(textColor.withAlpha(75))),
-                onPressed: () {},
+                onPressed: () {
+                  final todoProvider = context.read<TodoProvider>();
+
+                  todoProvider.delete(todo);
+                },
                 child: Icon(Icons.delete_rounded, color: textColor),
               )
             ],

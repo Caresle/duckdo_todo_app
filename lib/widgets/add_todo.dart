@@ -42,15 +42,17 @@ class _AddTodoState extends State<AddTodo> {
                       style: TextStyle(color: Colors.black),
                     )),
                 FilledButton(
-                  onPressed: () {
+                  onPressed: () async {
                     final todoProvider = context.read<TodoProvider>();
                     final TodoEntity todo = TodoEntity(
                         id: 0,
                         task: textEditingController.text,
                         completed: false);
-                    todoProvider.create(todo);
+                    await todoProvider.create(todo);
                     textEditingController.text = '';
-                    Navigator.of(context).pop();
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(Colors.black),
