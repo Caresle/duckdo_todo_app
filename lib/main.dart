@@ -1,7 +1,6 @@
 import 'package:duckdo_todo/config/environment.dart';
+import 'package:duckdo_todo/config/router/app_router.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
-import 'package:duckdo_todo/widgets/add_todo.dart';
-import 'package:duckdo_todo/widgets/todo_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -25,17 +24,10 @@ class MyApp extends StatelessWidget {
     final todoProvider = context.read<TodoProvider>();
     todoProvider.getAll();
 
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'DuckDo Todo',
-      home: Scaffold(
-          backgroundColor: Color.fromRGBO(226, 232, 240, 1),
-          body: SafeArea(
-              child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: TodoList(),
-          )),
-          floatingActionButton: AddTodo()),
+      routerConfig: appRouter,
     );
   }
 }
