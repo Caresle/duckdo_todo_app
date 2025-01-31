@@ -17,10 +17,7 @@ class _AddTodoState extends State<AddTodo> {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: Colors.black,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        // side: BorderSide(color: Colors.white),
-      ),
+      shape: CircleBorder(),
       onPressed: () {
         showDialog(
           context: context,
