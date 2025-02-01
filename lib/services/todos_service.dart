@@ -8,6 +8,8 @@ class TodosService {
           await Supabase.instance.client.from('todos').select().order('id');
       final List<TodoEntity> todos =
           response.map((todo) => TodoEntity.fromJSON(todo)).toList();
+
+      todos.sort((a, b) => b.completed ? -1 : 1);
       return todos;
     } catch (e) {
       return [];
