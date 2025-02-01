@@ -1,3 +1,4 @@
+import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('DuckDo Todo'),
-        backgroundColor: Color.fromRGBO(226, 232, 240, 1),
+        backgroundColor: AppTheme.complement,
       ),
-      backgroundColor: Color.fromRGBO(226, 232, 240, 1),
+      backgroundColor: AppTheme.complement,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8),

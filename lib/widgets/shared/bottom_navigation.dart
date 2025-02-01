@@ -1,3 +1,4 @@
+import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/config/router/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,10 +11,10 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      backgroundColor: Colors.white,
+      backgroundColor: AppTheme.secondary,
       elevation: 1,
-      surfaceTintColor: Colors.white,
-      indicatorColor: Colors.black,
+      surfaceTintColor: AppTheme.secondary,
+      indicatorColor: AppTheme.primary,
       selectedIndex: selectedItem,
       onDestinationSelected: (value) {
         if (value == 0) {
@@ -29,7 +30,7 @@ class BottomNavigation extends StatelessWidget {
             return NavigationDestination(
                 icon: Icon(
                   entry.value.icon,
-                  color: Colors.white,
+                  color: AppTheme.secondary,
                 ),
                 label: entry.value.name);
           }

@@ -1,3 +1,4 @@
+import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/entities/todo_entity.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +17,14 @@ class _AddTodoState extends State<AddTodo> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.black,
+      backgroundColor: AppTheme.primary,
       shape: CircleBorder(),
       onPressed: () {
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              backgroundColor: Colors.white,
+              backgroundColor: AppTheme.secondary,
               title: Text('New Task'),
               content: TextFormField(
                 controller: textEditingController,
@@ -36,7 +37,7 @@ class _AddTodoState extends State<AddTodo> {
                     },
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: AppTheme.primary),
                     )),
                 FilledButton(
                   onPressed: () async {
@@ -52,11 +53,11 @@ class _AddTodoState extends State<AddTodo> {
                     }
                   },
                   style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.black),
+                    backgroundColor: WidgetStatePropertyAll(AppTheme.primary),
                   ),
                   child: Text(
                     'Confirm',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: AppTheme.secondary),
                   ),
                 ),
               ],
@@ -66,7 +67,7 @@ class _AddTodoState extends State<AddTodo> {
       },
       child: Icon(
         Icons.add_rounded,
-        color: Colors.white,
+        color: AppTheme.secondary,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/screens/settings/row_item.dart';
 import 'package:duckdo_todo/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(226, 232, 240, 1),
+      backgroundColor: AppTheme.complement,
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(226, 232, 240, 1),
+        backgroundColor: AppTheme.complement,
         title: Text('Settings'),
       ),
       body: SafeArea(

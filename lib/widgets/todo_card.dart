@@ -1,3 +1,4 @@
+import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/entities/todo_entity.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,9 @@ class TodoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = !todo.completed ? Colors.white : Colors.black;
-    final textColor = !todo.completed ? Colors.black : Colors.white;
+    final backgroundColor =
+        !todo.completed ? AppTheme.secondary : AppTheme.primary;
+    final textColor = !todo.completed ? AppTheme.primary : AppTheme.secondary;
     final size = MediaQuery.of(context).size;
 
     return Padding(
@@ -25,7 +27,7 @@ class TodoCard extends StatelessWidget {
                 height: size.height * .75,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
-                  color: Colors.white,
+                  color: AppTheme.secondary,
                 ),
                 child: Center(
                   child: Padding(
@@ -35,6 +37,17 @@ class TodoCard extends StatelessWidget {
                         Text(
                           todo.task.toUpperCase(),
                           style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Enter description",
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -59,8 +72,8 @@ class TodoCard extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                           side: BorderSide(color: Colors.red)),
-                      activeColor: Colors.white,
-                      checkColor: Colors.black,
+                      activeColor: AppTheme.secondary,
+                      checkColor: AppTheme.primary,
                       onChanged: (value) {
                         final newTodo = todo.copyWith(completed: value);
                         final todoProvider = context.read<TodoProvider>();
