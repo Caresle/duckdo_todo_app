@@ -1,6 +1,7 @@
 import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/entities/todo_entity.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
+import 'package:duckdo_todo/widgets/bottom_sheet_todo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,6 @@ class TodoCard extends StatelessWidget {
     final backgroundColor =
         !todo.completed ? AppTheme.secondary : AppTheme.primary;
     final textColor = !todo.completed ? AppTheme.primary : AppTheme.secondary;
-    final size = MediaQuery.of(context).size;
 
     return Padding(
       padding: const EdgeInsets.all(4.0),
@@ -23,37 +23,7 @@ class TodoCard extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             builder: (context) {
-              return Container(
-                height: size.height * .75,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: AppTheme.secondary,
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Column(
-                      children: [
-                        Text(
-                          todo.task.toUpperCase(),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            maxLines: null,
-                            keyboardType: TextInputType.multiline,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: "Enter description",
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              );
+              return BottomSheetTodo(todo: todo);
             },
           );
         },
