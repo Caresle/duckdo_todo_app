@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 
 class TodoProvider extends ChangeNotifier {
   List<TodoEntity> _todos = [];
+  bool _isLoading = false;
 
   List<TodoEntity> get todos => _todos;
+  bool get isLoading => _isLoading;
 
   Future<void> getAll() async {
+    _isLoading = true;
     final list = await TodosService.getAll();
     _todos = list;
+    _isLoading = false;
     notifyListeners();
   }
 
