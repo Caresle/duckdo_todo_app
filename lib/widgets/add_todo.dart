@@ -1,5 +1,6 @@
 import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/entities/todo_entity.dart';
+import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,15 +17,17 @@ class _AddTodoState extends State<AddTodo> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.read<ThemeProvider>().isDark;
+
     return FloatingActionButton(
-      backgroundColor: AppTheme.primary,
+      backgroundColor: AppTheme.primary(isDark),
       shape: CircleBorder(),
       onPressed: () {
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              backgroundColor: AppTheme.secondary,
+              backgroundColor: AppTheme.secondary(isDark),
               title: Text('New Task'),
               content: TextFormField(
                 controller: textEditingController,
@@ -37,7 +40,7 @@ class _AddTodoState extends State<AddTodo> {
                     },
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: AppTheme.primary),
+                      style: TextStyle(color: AppTheme.primary(isDark)),
                     )),
                 FilledButton(
                   onPressed: () async {
@@ -53,11 +56,12 @@ class _AddTodoState extends State<AddTodo> {
                     }
                   },
                   style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(AppTheme.primary),
+                    backgroundColor:
+                        WidgetStatePropertyAll(AppTheme.primary(isDark)),
                   ),
                   child: Text(
                     'Confirm',
-                    style: TextStyle(color: AppTheme.secondary),
+                    style: TextStyle(color: AppTheme.secondary(isDark)),
                   ),
                 ),
               ],
@@ -67,7 +71,7 @@ class _AddTodoState extends State<AddTodo> {
       },
       child: Icon(
         Icons.add_rounded,
-        color: AppTheme.secondary,
+        color: AppTheme.secondary(isDark),
       ),
     );
   }

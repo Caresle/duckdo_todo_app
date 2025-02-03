@@ -1,7 +1,9 @@
 import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/config/router/menu_item.dart';
+import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
   final int selectedItem;
@@ -10,37 +12,49 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      backgroundColor: AppTheme.secondary,
-      elevation: 1,
-      surfaceTintColor: AppTheme.secondary,
-      indicatorColor: AppTheme.primary,
-      selectedIndex: selectedItem,
-      onDestinationSelected: (value) {
-        if (value == 0) {
-          context.go('/');
-        }
-        if (value == 1) {
-          context.go('/settings');
-        }
-      },
-      destinations: [
-        ...appMenuItems.asMap().entries.map((entry) {
-          if (selectedItem == entry.key) {
-            return NavigationDestination(
+    final isDark = context.read<ThemeProvider>().isDark;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+          navigationBarTheme: NavigationBarThemeData(
+              labelTextStyle: WidgetStatePropertyAll(
+                  TextStyle(color: AppTheme.primary(isDark))))),
+      child: NavigationBar(
+        backgroundColor: AppTheme.secondary(isDark),
+        elevation: 1,
+        surfaceTintColor: AppTheme.secondary(isDark),
+        indicatorColor: AppTheme.primary(isDark),
+        selectedIndex: selectedItem,
+        onDestinationSelected: (value) {
+          if (value == 0) {
+            context.go('/');
+          }
+          if (value == 1) {
+            context.go('/settings');
+          }
+        },
+        destinations: [
+          ...appMenuItems.asMap().entries.map((entry) {
+            if (selectedItem == entry.key) {
+              return NavigationDestination(
                 icon: Icon(
                   entry.value.icon,
-                  color: AppTheme.secondary,
+                  color: AppTheme.secondary(isDark),
                 ),
-                label: entry.value.name);
-          }
+                label: entry.value.name,
+              );
+            }
 
-          return NavigationDestination(
-            icon: Icon(entry.value.icon),
-            label: entry.value.name,
-          );
-        })
-      ],
+            return NavigationDestination(
+              icon: Icon(
+                entry.value.icon,
+                color: AppTheme.primary(isDark),
+              ),
+              label: entry.value.name,
+            );
+          })
+        ],
+      ),
     );
   }
 }

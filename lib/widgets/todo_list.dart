@@ -1,4 +1,5 @@
 import 'package:duckdo_todo/config/app_theme.dart';
+import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
 import 'package:duckdo_todo/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.read<ThemeProvider>().isDark;
+
     return Consumer<TodoProvider>(
       builder: (context, value, child) {
         if (value.isLoading) {
@@ -20,7 +23,7 @@ class TodoList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(
-                    color: AppTheme.primary,
+                    color: AppTheme.primary(isDark),
                   ),
                   Text('Loading todos')
                 ],
@@ -36,7 +39,13 @@ class TodoList extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('Hide completed task'), CustomSwitch()],
+              children: [
+                Text(
+                  'Hide completed task',
+                  style: TextStyle(color: AppTheme.primary(isDark)),
+                ),
+                CustomSwitch()
+              ],
             ),
             Expanded(
               child: ListView.builder(

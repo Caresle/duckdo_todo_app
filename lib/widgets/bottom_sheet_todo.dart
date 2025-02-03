@@ -1,6 +1,8 @@
 import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/entities/todo_entity.dart';
+import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomSheetTodo extends StatelessWidget {
   final TodoEntity todo;
@@ -9,12 +11,17 @@ class BottomSheetTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final isDark = context.read<ThemeProvider>().isDark;
+    final backgroundColor =
+        !todo.completed ? AppTheme.secondary(isDark) : AppTheme.primary(isDark);
+    final textColor =
+        !todo.completed ? AppTheme.primary(isDark) : AppTheme.secondary(isDark);
 
     return Container(
       height: size.height * .75,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
-        color: AppTheme.secondary,
+        color: backgroundColor,
       ),
       child: Center(
         child: Padding(
@@ -28,20 +35,24 @@ class BottomSheetTodo extends StatelessWidget {
                 children: [
                   Text(
                     todo.task.toUpperCase(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: textColor),
                   ),
-                  Text('Notes'),
+                  Text('Notes', style: TextStyle(color: textColor)),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(height: 200, child: _TextArea()),
-                  ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 200,
+                        child: _TextArea(),
+                      )),
                 ],
               ),
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(AppTheme.primary),
+                      backgroundColor:
+                          WidgetStatePropertyAll(AppTheme.primary(isDark)),
                     ),
                     onPressed: () {},
                     child: Row(
@@ -49,7 +60,10 @@ class BottomSheetTodo extends StatelessWidget {
                       children: [
                         Icon(Icons.save_rounded),
                         const SizedBox(width: 4),
-                        Text('Save'),
+                        Text(
+                          'Save',
+                          style: TextStyle(color: AppTheme.secondary(isDark)),
+                        ),
                       ],
                     )),
               )
@@ -63,26 +77,29 @@ class BottomSheetTodo extends StatelessWidget {
 
 class _TextArea extends StatelessWidget {
   const _TextArea();
+
   OutlineInputBorder getBorder(Color color) =>
       OutlineInputBorder(borderSide: BorderSide(color: color));
 
-  InputDecoration getDecoration() => InputDecoration(
-        filled: true,
-        focusedBorder: getBorder(AppTheme.primary),
-        enabledBorder: getBorder(AppTheme.complement),
-        fillColor: AppTheme.complement,
-        focusColor: AppTheme.complement,
-        border: getBorder(AppTheme.complement),
-        hintText: "Enter description",
-      );
+  InputDecoration getDecoration(bool isDark) => InputDecoration(
+      filled: true,
+      focusedBorder: getBorder(AppTheme.primary(isDark)),
+      enabledBorder: getBorder(AppTheme.complement(isDark)),
+      fillColor: AppTheme.complement(isDark),
+      focusColor: AppTheme.complement(isDark),
+      border: getBorder(AppTheme.complement(isDark)),
+      hintText: "Enter description",
+      labelStyle: TextStyle(color: AppTheme.secondary(isDark)));
   @override
   Widget build(BuildContext context) {
+    final isDark = context.read<ThemeProvider>().isDark;
     return TextField(
+      style: TextStyle(color: AppTheme.secondary(isDark)),
       maxLines: null,
       expands: true,
       keyboardType: TextInputType.multiline,
       textAlignVertical: TextAlignVertical.top,
-      decoration: getDecoration(),
+      decoration: getDecoration(isDark),
     );
   }
 }

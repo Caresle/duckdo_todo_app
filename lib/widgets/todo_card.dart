@@ -1,5 +1,6 @@
 import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/entities/todo_entity.dart';
+import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:duckdo_todo/providers/todo_provider.dart';
 import 'package:duckdo_todo/widgets/bottom_sheet_todo.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +13,19 @@ class TodoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.read<ThemeProvider>().isDark;
+
     final backgroundColor =
-        !todo.completed ? AppTheme.secondary : AppTheme.primary;
-    final textColor = !todo.completed ? AppTheme.primary : AppTheme.secondary;
+        !todo.completed ? AppTheme.secondary(isDark) : AppTheme.primary(isDark);
+    final textColor =
+        !todo.completed ? AppTheme.primary(isDark) : AppTheme.secondary(isDark);
 
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: GestureDetector(
         onTap: () {
           showModalBottomSheet(
+            backgroundColor: backgroundColor,
             context: context,
             builder: (context) {
               return BottomSheetTodo(todo: todo);
@@ -42,8 +47,8 @@ class TodoCard extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                           side: BorderSide(color: Colors.red)),
-                      activeColor: AppTheme.secondary,
-                      checkColor: AppTheme.primary,
+                      activeColor: AppTheme.secondary(isDark),
+                      checkColor: AppTheme.primary(isDark),
                       onChanged: (value) {
                         final newTodo = todo.copyWith(completed: value);
                         final todoProvider = context.read<TodoProvider>();
