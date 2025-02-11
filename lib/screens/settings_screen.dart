@@ -26,18 +26,16 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            RowItem(icon: Icons.wb_sunny_rounded, text: 'Dark Theme'),
+            RowItem(
+              icon: Icons.wb_sunny_rounded,
+              text: 'Dark Theme',
+              value: isDark,
+              onChanged: (value) {
+                final themeProvider = context.read<ThemeProvider>();
+                themeProvider.toggleTheme();
+              },
+            ),
             RowItem(icon: Icons.notifications_rounded, text: 'Reminders'),
-            FilledButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStatePropertyAll(isDark ? Colors.red : Colors.blue),
-                ),
-                onPressed: () {
-                  final themeProvider = context.read<ThemeProvider>();
-                  themeProvider.toggleTheme();
-                },
-                child: Text('Toggle theme'))
           ],
         ),
       ),

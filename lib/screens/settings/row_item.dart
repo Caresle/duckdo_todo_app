@@ -7,8 +7,15 @@ import 'package:provider/provider.dart';
 class RowItem extends StatelessWidget {
   final IconData icon;
   final String text;
+  final bool value;
+  final void Function(bool value)? onChanged;
 
-  const RowItem({super.key, required this.icon, required this.text});
+  const RowItem(
+      {super.key,
+      required this.icon,
+      required this.text,
+      this.value = false,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +37,10 @@ class RowItem extends StatelessWidget {
             ),
           ],
         ),
-        CustomSwitch(value: true),
+        CustomSwitch(
+          value: value,
+          onChanged: onChanged,
+        ),
       ]),
     );
   }
