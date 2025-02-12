@@ -40,37 +40,69 @@ class BottomSheetTodo extends StatelessWidget {
                   ),
                   Text('Notes', style: TextStyle(color: textColor)),
                   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: 200,
-                        child: _TextArea(),
-                      )),
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: 200,
+                      child: _TextArea(),
+                    ),
+                  ),
+                  FilledButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll(AppTheme.complement(isDark)),
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.image_rounded,
+                            color: AppTheme.primary(isDark),
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Upload Image',
+                            style: TextStyle(color: AppTheme.primary(isDark)),
+                          )
+                        ],
+                      ))
                 ],
               ),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStatePropertyAll(AppTheme.primary(isDark)),
-                    ),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.save_rounded),
-                        const SizedBox(width: 4),
-                        Text(
-                          'Save',
-                          style: TextStyle(color: AppTheme.secondary(isDark)),
-                        ),
-                      ],
-                    )),
-              )
+              _SaveButton(isDark: isDark)
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _SaveButton extends StatelessWidget {
+  const _SaveButton({
+    required this.isDark,
+  });
+
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(AppTheme.primary(isDark)),
+          ),
+          onPressed: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.save_rounded),
+              const SizedBox(width: 4),
+              Text(
+                'Save',
+                style: TextStyle(color: AppTheme.secondary(isDark)),
+              ),
+            ],
+          )),
     );
   }
 }
