@@ -2,6 +2,7 @@ import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:duckdo_todo/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -32,7 +33,9 @@ class HomeScreen extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.logout_rounded),
-              onTap: () {},
+              onTap: () {
+                context.go('/login');
+              },
               title: Text('Logout'),
             )
           ],

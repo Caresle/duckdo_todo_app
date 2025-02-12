@@ -1,3 +1,4 @@
+import 'package:duckdo_todo/screens/login_screen.dart';
 import 'package:duckdo_todo/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -49,6 +50,13 @@ final appMenuItems = <MenuItem>[
     icon: Icons.home_rounded,
     isBottom: true,
     widgetPage: HomeScreen(),
+  ),
+  const MenuItem(
+    name: 'Login',
+    path: '/login',
+    icon: Icons.login_rounded,
+    isBottom: false,
+    widgetPage: LoginScreen(),
   ),
   const MenuItem(
     name: 'Settings',
