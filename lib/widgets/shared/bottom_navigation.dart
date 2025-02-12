@@ -1,5 +1,6 @@
 import 'package:duckdo_todo/config/app_theme.dart';
 import 'package:duckdo_todo/config/router/menu_item.dart';
+import 'package:duckdo_todo/config/router/router.dart';
 import 'package:duckdo_todo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +35,7 @@ class BottomNavigation extends StatelessWidget {
           }
         },
         destinations: [
-          ...appMenuItems.asMap().entries.map((entry) {
+          ...bottomRoutes.asMap().entries.map((entry) {
             if (selectedItem == entry.key) {
               return NavigationDestination(
                 icon: Icon(

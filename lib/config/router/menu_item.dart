@@ -55,7 +55,6 @@ final appMenuItems = <MenuItem>[
     name: 'Login',
     path: '/login',
     icon: Icons.login_rounded,
-    isBottom: false,
     widgetPage: LoginScreen(),
   ),
   const MenuItem(
